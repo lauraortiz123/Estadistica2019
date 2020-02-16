@@ -1,0 +1,135 @@
+## Cargar los contenidos necesarios para la práctica
+library(ape)
+library(permute)
+library(vegan)
+library(ade4)
+library(geiger) 
+data("carnivora")
+data("jackal")
+data("BCI")
+data("mite.env")
+data("atlas")
+data("carniherbi49")
+data("corvus")
+data("tortues")
+data("geospiza")
+help("geospiza")
+## ¿Qué es BCI y geospiza?
+class("geospiza")
+class("BCI")
+str(geospiza)
+## ¿Qué es geospiza?
+help("geospiza")
+# Acceder al segundo objeto de geospiza
+geospiza$geospiza.data
+# Extraer un objeto dentro de la tabla asignando una posición
+geospiza$geospiza.data[,1]
+# ¿Qué tipo de variable es tarsusL? ¿Qué clase?
+class("tarsusL")
+str("tarsusL")
+class(mite.env)
+str(mite.env)
+class("shurb")
+str("shurb")
+## Podemos generar variables computadas a partir de variables medidas independientemente. Por ejemplo, mirar la proporción de sexos de un muestreo
+# Semilla
+set.seed(1)
+# Sexos
+sex <- c("F", "M")
+# Inventemos una muestra con las mismas probabilidades de sacar un Macho o una Hembra
+pop1 <- sample(x = sex, size = 50, replace = T, prob = c(0.5,0.5))
+# Imaginemos que pop1 es real y queremos saber cuál es la razón de sexos en la muestra
+M <- length(which(pop1 == "M"))
+F <- length(which(pop1 == F))
+# La razón es
+paste(F,"/",M, sep = "")
+# ¿Qué pasaría si en el sitio encontráramos más hembras que machos?
+set.seed(1)
+sex <- c("F", "M")
+pop1 <- sample(x = sex, size = 50, replace = T, prob = c(0.8,0.2))
+M <- length(which(pop1 == 'M'))
+F <- length(which(pop1 == 'F'))
+paste(F,'/',M,sep = '')
+# Usando el data.frame tortues calcule la proporción de hembras y machos de la muestra
+M <- length(which(tortues$sexe == 'M'))
+F <- length(which(tortues$sexe == 'F'))
+paste(F,'/',M,sep = '')
+# [1] 24/24
+## También podemos generar la proporción entre dos medidas, por ejemplo el ancho y el largo para obtener una variable derivada que represente la forma
+# Imaginemos que tomamos medidas de cráneos de lagarto
+Ancho<-rnorm(n = 32,mean = 10,sd = 1)
+Largo <- rnorm(n = 32,mean = 15,sd = 1)
+# Construimos la tabla con medidas imaginarias
+medidas<-cbind(Ancho, Largo)
+Tabla_medidas <- as.data.frame(cbind(paste('spp',1:32,sep = '_'),medidas))
+colnames(Tabla_medidas) <- c('Individuos', 'Ancho','Largo')
+Tabla_medidas
+prp <- Ancho/Largo
+Tabla_medidas_prp <- cbind.data.frame(Tabla_medidas, prp)
+# Usando el data.frame tortues calcule la proporción entre el ancho y el largo del caparazón, genere una tabla con la información de tortues y la nueva variable derivada
+longlarg <- paste(tortues$long,'/', tortues$larg,sep = '')
+Tabla_proporcion <- cbind.data.frame(tortues, longlarg)
+## Tablas
+# Conteo o frecuencia
+freq<-table(mite.env$Substrate)
+freq
+# Fracción
+prop.table(freq)
+# Las proporciones puedese ser visualizadas usando la función *pie*
+pie(prop.table(freq))
+# ¿Cuántas especies de Corvus fueron muestreadas en la región Paleártica-Africana? Use el data.frame del género Corvus. ¿Qué porcentaje de Corvus muestreados habitan zonas abiertas?
+freqc <- table(corvus$phylog)
+prop.table(freqc)
+pie(prop.table(freqc))
+## Distribución de frecuencias
+plot(freq)
+# Gráfico para tipos de hábitat del género Corvus
+plot(freqc)
+# Pero si las variables son cuantitativas, los valores deben ser dispuestos en rangos que permitan observar el comportamiento de las frecuencias. Primero, debemos generar una tabla de frecuencias}
+atlas$birds
+xsp<- apply(atlas$birds,2,sum)
+# Preguntar cuál es el mínimo 
+min(xsp)
+which.min(xsp)
+xsp[which.min(xsp)]
+#generando vector
+x <- which.min(xsp)
+xsp[x]
+#Ejercicio: encuentre el máximo
+max(xsp)
+which.max(xsp)
+#Longitud de las tortugas
+tortues$long
+#Organizar en rangos
+table(tortues$long)
+#¿mínimo?
+min(tortues$long)
+#¿máximo?
+max(tortues$long)
+#Ver directamente el rango
+range(tortues$long)
+#Generar las cajas
+bins <- seq(92.5,177.5, 10)
+#Agrupar los datos en cajas
+datos <- cut(tortues$long,bins)
+#Generar tablas de frecuencias
+freq_long<-table(datos)
+#Generar un dataframe de frecuencias
+transform(freq_long)
+transform(freq_long, Relativ= prop.table(Freq), Acum= cumsum(Freq))
+#Histograma de datos crudos
+hist(tortues$long)
+#Ejercicio
+data(corvus)
+datos <- c(corvus$wing, corvus$bill)
+datos
+table(datos)
+min(datos)
+max(datos)
+range(datos)
+bins1 <- seq(44.5, 473.5, 10)
+datoscor <- cut(datos, bins1)
+tablaf <- table(datoscor)
+transform(tablaf)
+hist(datos)
+hist(datos, col= rainbow(8))
