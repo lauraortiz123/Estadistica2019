@@ -1,0 +1,65 @@
+## Crear un objeto
+x = 2
+y <- 3
+4 -> z
+## Reasignar el valor de z
+5->z
+z
+## El valor anterior es reemplazado
+z<- 10 + 2
+z <- 3 + rnorm(1)
+## ¿Qué es R norm?
+?rnorm
+rnorm(1)
+## Crear una secuencia
+x <- 1:10
+## Realizar una operación con cada número dentro de la secuencia
+x + 1
+((2*x+1)/1.5)^2
+# Crear objetos de diferentes clases
+animales <- c('perro','gato','fara')
+frases <- "El gato se comió el fara"
+numeros <- rep(x=1:3,3)/1.5
+enteros <- seq(from=1,to=10,by=2)
+complejos <- c(2i, 5i, 3i)
+logicos <- c(T,F,TRUE,FALSE)
+# ¿Cuál es la clase del vector "complejos"?
+class(complejos)
+# Es posible crear un vector con más de una clase, pero al final solo tendrá una
+prueba <- c(1, "perro", FALSE, "gato", 1.5)
+# ¿Qué clase tiene el vector?
+class(prueba)
+# Vectores con niveles
+grupo_altura <- factor(c("mediano","pequeño","grande","muy grande"),
+                       levels=c("pequeño","mediano","grande","muy grande"))
+# Listar los objetos para ver las variables y sus tipos
+ls()
+ls.str()
+vector1 <- seq(1:12)
+# Las matrices son un conjunto de vectores ordenado por filas y columnas, cada elemento siendo del mismo tipo
+matrix1 <- matrix(data=1:12,nrow=3,ncol=4)
+# "[]" se usa para extraer posiciones específicas de un vector o una matriz
+vector1[6]
+matrix1[2,3]
+# Los arreglos son múltiples matrices una detrás de la otra
+arreglo <- array(data = 1:12,dim=c(3,4,3))
+arreglo[2,4,3]
+# Crear una secuencia que repita los números de 1 a 4, 3 veces y asignarla a un objeto llamado vector1. Crear una secuencia de números pares del 2 al 24 y asignarla a un objeto llamado vector2. Generar un arreglo con ambos vectores y buscar la columna 2, fila 1 de la segunda matriz y para la primera
+vector1 <-rep(1:4,3)
+vector2 <-seq(2,24,2)
+arreglo <- array(data=c(vector1,vector2),dim=c(3,4,2))
+arreglo[1,2,1]
+arreglo[1,2,2]
+# Un dataframe es similar a una matriz, salvo que cada columna puede tener diferentes clases y es posible asignarles nombres
+data(iris)
+# El signo "$" se usa para extraer columnas
+iris$Sepal.Length
+# Longitud del sépalo del individuo 36
+iris$Sepal.Length[36]
+iris[36,1]
+# Concatenar la primera y segunda columna
+concatenar <- c(iris$Sepal.Length, iris$Sepal.Width)
+minuevatabla <- cbind(iris$Sepal.Length, iris$Sepal.Width)
+data <- read.csv('Matrix_Multivariate_Mega.csv')
+data1 <- data[1:5,1:10]
+write.csv(x = data1,file = 'Minimatriz.csv')
