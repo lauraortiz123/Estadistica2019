@@ -1,4 +1,4 @@
-#Estimar la media artimética, la longitudel ancho del caparazón de las tortugas pintadas
+#Estimar la media artimética, la longitud y el ancho del caparazón de las tortugas pintadas
 library(ade4)
 data(tortues)
 height <- tortues[,3]
