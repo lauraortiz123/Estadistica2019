@@ -1,0 +1,183 @@
+# Cúal es la probabilidad de que 5 individual sean bb (homocigoto recesivo)
+dbinom(5, size = 8, prob =0.25)
+dbinom(0:8, size = 8, prob =0.25)
+plot(0:8,dbinom(0:8, size = 8, prob =0.25))
+
+# ¿Cúal es la probabilidad de que 5 o menos sean bb?
+pbinom(5, size = 8, prob =0.25)
+
+# ¿Cúal es la probabilidad de que más de 5  sean bb
+
+1 - pbinom(5, size = 8, prob =0.25)
+
+pbinom(5, size = 8, prob =0.25,lower.tail=FALSE)
+
+# ¿Cúal es el percentíl 90?
+
+qbinom(0.9, 8, 0.25)
+
+## Distribución de Poison
+
+# Cúal de que en un bloque hayan 2 semillas
+dpois(x = 2,lambda = 1.5)
+
+plot(dpois(x = 0:20,lambda = 1.5))
+
+# ¿Cúal es la probabilidad de encontrar 5 o menos semillas en un bloque?
+
+ppois(q = 5 ,lambda = 1.5)
+
+# ¿Cúal es la probabilidad de encontrar 8 o más semillas en un bloque?
+1 - ppois(8, lambda = 1.5)
+
+# ¿Cúal es el percentíl 90?
+qpois(0.6,1.5)
+
+# ¿Cúal es la probabilidad de encontrar 6 semillas por bloque?, si el terreno es más pequeño (2x2m) y el promedio de semillas por bloque es de 10 Grafique todos los eventos de 0 a 50
+dpois(6,10)
+plot(dpois(x = 0:50,lambda = 10),type="b")
+
+# Variables aleatorias o distribuciones continuas
+
+# Muestra
+x<-abs(rnorm(30, 165, 4))
+
+#Cúal es la probailidad de encontrar mujeres con alturas menores a 160cm
+
+pnorm(160, 165, 4)
+
+#Cúal es la probailidad de encontrar mujeres con alturas mayores a 170cm
+
+pnorm(170, 165, 4,lower.tail = FALSE)
+
+#Cúal es la probailidad de encontrar mujeres con alturas mayores a 160cm
+
+pnorm(160, 165, 4,lower.tail = FALSE)
+
+#Cúal es la probailidad de encontrar mujeres con alturas entre 150cm y 170cm
+
+pnorm(170, 165, 4) - pnorm(150, 165, 4)
+
+#Cúal es la probailidad de encontrar mujeres con alturas entre 170cm y 190cm
+
+pnorm(190, 165, 4) - pnorm(170, 165, 4)
+
+#Graficar
+
+curve(dnorm(x, 165, 4), 145, 200, main = "Alturas de mujeres colombianas")
+
+library(ade4)
+data("carniherbi49")
+head(carniherbi49$tab2)
+
+# Carnivoros
+pesos <- carniherbi49$tab2$bodymass[which(carniherbi49$tab2$clade== 'Carnivore')]
+meanC <- mean(carniherbi49$tab2$bodymass[which(carniherbi49$tab2$clade== 'Carnivore')])
+sdC <-sd(carniherbi49$tab2$bodymass[which(carniherbi49$tab2$clade== 'Carnivore')])
+pnorm(1.5, meanC, sdC)
+hist(pesos)
+
+# Herbivore
+pesosH <- carniherbi49$tab2$bodymass[which(carniherbi49$tab2$clade== 'Herbivore')]
+meanH <- mean(pesosH)
+sdH <-sd(pesosH)
+pnorm(1.5, meanH, sdH)
+hist(pesosH)
+
+# A partir del tortues del paquete ade4, calcule el promedio y la desviación estándar de las alturas de caparazones de las tortugas. Haga el análisis por sexo y grafíquelo
+data("tortues")
+tortues
+promedioaltura <- mean(tortues$haut)
+promedioaltura
+desviacionEstandaraltura <- sd(tortues$haut)
+desviacionEstandaraltura
+tortues_M_Altura <- tortues$haut[which(tortues$sexe=="M")]
+range(tortues_M_Altura)
+mi.moda(tortues_M_Altura)
+tortues_F_Altura <- tortues$haut[which(tortues$sexe=="F")]
+
+#Tortugas macho
+hist(tortues_M_Altura,
+     col = "lemonchiffon",
+     border = "black",
+     prob = TRUE,
+     xlim = c(33,50),
+     xlab = "Altura",
+     main = "Altura de tortugas de sexo macho")
+lines(density(tortues_M_Altura),
+      lwd = 2,
+      col = "coral")
+# Graficar la media
+abline(v = mean(tortues_M_Altura),
+       col = "mediumspringgreen",
+       lwd = 2)
+
+abline(v = median(tortues_M_Altura),
+       col = "cyan",
+       lwd = 2)
+
+abline(v= 41, 
+       col="blueviolet",
+       lwd= 2 )
+
+legend(x = "topright", # location of legend within plot area
+       c("Density plot", "Mean", "Median", "Moda"),
+       col = c("coral", "mediumspringgreen", "cyan", "blueviolet"),
+       lwd = c(2, 2, 2))
+#Tortugas hembra
+tortues_F_Altura <- tortues$haut[which(tortues$sexe=="F")]
+mi.moda(tortues_F_Altura)
+range(tortues_F_Altura)
+
+hist(tortues_F_Altura, 
+     col = "lavenderblush",
+     border = "black",
+     prob=T,
+     xlim = c(33,75),
+     xlab = "Altura",
+     main = "Altura de tortugas de sexo hembra")
+lines(density(tortues_F_Altura),
+      lwd = 2,
+      col = "coral")
+# Graficar la media
+abline(v = mean(tortues_F_Altura),
+       col = "mediumspringgreen",
+       lwd = 2)
+
+abline(v = median(tortues_F_Altura),
+       col = "cyan",
+       lwd = 2)
+
+abline(v= 51, 
+       col="blueviolet",
+       lwd= 2 )
+
+legend(x = "topright",
+       c("Density plot", "Mean", "Median", "Moda"),
+       col = c("coral", "mediumspringgreen", "cyan", "blueviolet"),
+       lwd = c(2, 2, 2))
+
+# Lea el artículo sobre tipos de crecimientos poblacionales y escriba el código en R que mejor describa el ejemplo de las bacterias en crecimiento exponencial
+poblacion.bacterias.1 <- 1000 # Población inicial 
+t <- 0:24 # Tiempo 
+poblacion.1.bacterias.t <- poblacion_1_bacterias*(2)^ t # Funcion exponencial del crecimeinto de bacterias 
+poblacion.1.bacterias.t 
+
+# Simule 5000 peces de criadero en un tanque, todos son de la misma cohorte. Imagine que los organiza en fila y quiere seleccionar 100 para calcular estadísticos de la población. Haga un muestreo sistemático y calcule los estadísticos y descriptivos vistos anteriormente. Grafique
+pesopeces= abs(rnorm(5000, 10, 1))
+?rnorm
+pesopeces
+N<- 5000
+n<- 100
+K<- N/n
+k
+sample(1:K, 1)
+?seq
+grupo<- seq(10, 5000, 50)
+grupo
+str(grupo)
+estadisticos<- pesopeces[grupo]
+estadisticos
+ensity(estadisticos)
+hist(estadisticos, main="DISTRIBUCIÓN DE PESOS DE PECES", xlab= "Peso", ylab="Frecuencia", col= "green")
+
