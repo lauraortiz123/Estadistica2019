@@ -1,0 +1,213 @@
+# Imagine una población de 5000 tortugas de la especie Caretta caretta. Una nidada podría tener entre 20 a 50 huevos
+
+set.seed(999)
+
+# Generar la población
+
+pop <- ceiling(rnorm(5000, mean = 35,sd = 1))
+
+# Tomar muestras en tres playas distintas
+m1 <- sample(x = pop,size = 10, replace = T)
+m2 <- sample(x = pop,size = 10, replace = T)
+m3 <- sample(x = pop,size = 10, replace = T)
+
+# Calcular media, desviación y error
+
+mean(m1)
+
+sd(m1)
+
+sd(m1)/sqrt(length(m1))
+
+mean(m2)
+
+sd(m2)
+
+sd(m2)/sqrt(length(m2))
+
+mean(m3)
+
+sd(m3)
+
+sd(m3)/sqrt(length(m3))
+
+boxplot(cbind(m1,m2,m3))
+
+sd(c(m1,m2,m3))/sqrt(length(c(m1,m2,m3)))
+
+## Aumente el valor de desviación estándar y evalúe cómo cambia el error estándar
+
+set.seed(999)
+
+pop <- ceiling(rnorm(5000, mean = 35,sd = 5))
+
+# Tomar muestras en tres playas distintas
+
+m1 <- sample(x = pop,size = 10, replace = T)
+m2 <- sample(x = pop,size = 10, replace = T)
+m3 <- sample(x = pop,size = 10, replace = T)
+
+# Calcular media, desviación y error
+mean(m1)
+sd(m1)
+sd(m1)/sqrt(length(m1))
+
+mean(m2)
+sd(m2)
+sd(m2)/sqrt(length(m2))
+
+mean(m3)
+sd(m3)
+sd(m3)/sqrt(length(m3))
+
+boxplot(cbind(m1,m2,m3))
+
+# Error estandar 
+
+sd(c(m1,m2,m3))/sqrt(length(c(m1,m2,m3)))
+
+## Aumente el tamaño de la muestra y evalúe cómo cambia el error estándar
+
+set.seed(999)
+
+pop <- ceiling(rnorm(5000, mean = 35,sd = 5))
+
+# Tomar muestras en tres playas distintas
+
+m1 <- sample(x = pop,size = 20, replace = T)
+m2 <- sample(x = pop,size = 20, replace = T)
+m3 <- sample(x = pop,size = 20, replace = T)
+
+# Calcular media, desviación y error
+
+mean(m1)
+
+sd(m1)
+
+sd(m1)/sqrt(length(m1))
+
+mean(m2)
+
+sd(m2)
+
+sd(m2)/sqrt(length(m2))
+
+mean(m3)
+
+sd(m3)
+
+sd(m3)/sqrt(length(m3))
+
+boxplot(cbind(m1,m2,m3))
+
+# Error estándar 
+
+sd(c(m1,m2,m3))/sqrt(length(c(m1,m2,m3)))
+
+# El error estándar disminuyó
+
+## Para el caso donde la población no sigue una distribución normal
+
+set.seed(999)
+
+# Generar la población
+
+pop <- c(ceiling(rnorm(3500, mean = 30,sd = 3)), ceiling(runif(500, 45,51)))
+
+myhist <- hist(pop)
+
+multiplier <- myhist$counts / myhist$density
+mydensity <- density(pop)
+mydensity$y <- mydensity$y * multiplier[1]
+
+plot(myhist)
+lines(mydensity)
+
+# Tomar muestras en tres playas distintas
+
+m1 <- sample(x = pop,size = 5, replace = T)
+m2 <- sample(x = pop,size = 5, replace = T)
+m3 <- sample(x = pop,size = 5, replace = T)
+
+# Calcular media, desviación y error
+
+mean(m1)
+
+sd(m1)
+
+sd(m1)/sqrt(length(m1))
+
+sd(m2)/sqrt(length(m2))
+
+mean(m3)
+
+sd(m3)
+
+sd(m3)/sqrt(length(m3))
+
+#Graficar 
+boxplot(cbind(m1,m2,m3))
+
+muestras <- c(m1,m2,m3)
+
+myhist <- hist(muestras)
+
+multiplier <- myhist$counts / myhist$density
+mydensity <- density(muestras)
+mydensity$y <- mydensity$y * multiplier[1]
+
+plot(myhist)
+lines(mydensity)
+
+# Error estándar 
+
+sd(c(m1,m2,m3))/sqrt(length(c(m1,m2,m3)))
+
+## Cambie el tamaño de muestra y evalúe el valor de error estándar. ¿Cuánto debería aumentar la muestra para que el error estándar disminuya a la mitad?
+
+set.seed(999)
+
+# Generar la población
+
+pop <- c(ceiling(rnorm(3500, mean = 30,sd = 3)), ceiling(runif(500, 45,51)))
+
+myhist <- hist(pop)
+multiplier <- myhist$counts / myhist$density
+mydensity <- density(pop)
+mydensity$y <- mydensity$y * multiplier[1]
+
+plot(myhist)
+lines(mydensity)
+
+# Tomar muestras en tres playas distintas
+m1 <- sample(x = pop,size = 20, replace = T)
+m2 <- sample(x = pop,size = 20, replace = T)
+m3 <- sample(x = pop,size = 20, replace = T)
+
+# Calcular media, desviación y error
+mean(m1)
+sd(m1)
+sd(m1)/sqrt(length(m1))
+
+mean(m2)
+sd(m2)
+sd(m2)/sqrt(length(m2))
+
+mean(m3)
+
+sd(m3)
+sd(m3)/sqrt(length(m3))
+
+boxplot(cbind(m1,m2,m3))
+muestras <- c(m1,m2,m3)
+myhist <- hist(muestras)
+multiplier <- myhist$counts / myhist$density
+mydensity <- density(muestras)
+mydensity$y <- mydensity$y * multiplier[1]
+plot(myhist)
+lines(mydensity)
+
+# Error estándar 
+sd(c(m1,m2,m3))/sqrt(length(c(m1,m2,m3)))
+
+# Para reducir el error estandar a la mitad hay que reducir la muestra a 20 individuos
