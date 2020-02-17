@@ -57,7 +57,7 @@ legend(x = "topright",
 # Generar cuantiles en intervalos de 0.5
 quantile(setosa,probs = c(seq(0, 1, 0.5)))
 #¿Qué sucede si el número de columnas deseado no se especifica? 
-# Arroja el resultado NA debido a la falta de argumento lógico/numérico
+# El resultado obtenido NA debido a que no se encuentra ningún argumento lógico o numérico, por lo que hay qué especificar el número de columnas
 ##Obtenga la mediana, la moda y los cuantiles para cada especie de iris y para cada variable morfométrica
 #VIRGINICA
 
