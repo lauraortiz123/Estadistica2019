@@ -14,7 +14,7 @@ if(!require(rcompanion)){install.packages("rcompanion")}
 if(!require(car)){install.packages("car")}
 if(!require(HardyWeinberg)){install.packages("HardyWeinberg")}
 
-setwd("C:/Users/USER/OneDrive/Documentos/NUEVO/libros biologia/ESTAD蚐TICA/Laboratorio/github/TRABAJOS EN CLASE/semana 12 y 13")
+setwd("C:/Users/USER/OneDrive/Documentos/NUEVO/libros biologia/ESTAD脥STICA/Laboratorio/github/TRABAJOS EN CLASE/semana 12 y 13")
 install.packages("readr")
 library("readr")
 getwd()
@@ -24,7 +24,7 @@ View(Data)
 attach(Data)
 
 
-###### Exploraci髇 manual
+###### Exploraci贸n manual
 
 glimpse(Data)
 #Observations: 693
@@ -46,7 +46,7 @@ ddply(Data, 'COUNTRY', summarise, grp.mean=mean(DB),
 
 table(Data$COUNTRY)
 
-##### Exploraci髇 visual
+##### Exploraci贸n visual
 
 ggplot(Data)+
   geom_point(aes(x=BL, y=WB,color= COUNTRY,shape=COUNTRY))
@@ -92,7 +92,7 @@ ggplot(data = mexico, aes(x=BL)) +
   stat_function(fun = dnorm, colour = "firebrick",
                 args = list(mean = mean(mexico$BL),
                             sd = sd(mexico$BL))) +
-  ggtitle("Histograma mexico + curva normal te髍ica") +
+  ggtitle("Histograma mexico + curva normal te贸rica") +
   theme_bw()
 
 #Mexico-WB
@@ -103,7 +103,7 @@ ggplot(data = mexico, aes(x=WB)) +
   stat_function(fun = dnorm, colour = "firebrick",
                 args = list(mean = mean(mexico$WB),
                             sd = sd(mexico$WB))) +
-  ggtitle("Histograma mexico + curva normal te髍ica") +
+  ggtitle("Histograma mexico + curva normal te贸rica") +
   theme_bw()
 
 #Mexico-DB
@@ -114,7 +114,7 @@ ggplot(data = mexico, aes(x=DB)) +
   stat_function(fun = dnorm, colour = "firebrick",
                 args = list(mean = mean(mexico$DB),
                             sd = sd(mexico$DB))) +
-  ggtitle("Histograma mexico + curva normal te髍ica") +
+  ggtitle("Histograma mexico + curva normal te贸rica") +
   theme_bw()
 
 
@@ -122,15 +122,15 @@ ggplot(data = mexico, aes(x=DB)) +
 ########## TEST DE NORMALIDAD
 
 
-#Contrastes de hip髏esis
+#Contrastes de hip贸tesis
 #Muestra mayor a 50
-lillie.test(x = mexico$BL ) #Distribuci髇 normal
+lillie.test(x = mexico$BL ) #Distribuci贸n normal
 
-lillie.test(x = mexico$WB ) #No tiene distribuci髇 normal
+lillie.test(x = mexico$WB ) #No tiene distribuci贸n normal
 
-lillie.test(x = mexico$DB ) #No tiene distribuci髇 normal
+lillie.test(x = mexico$DB ) #No tiene distribuci贸n normal
 
-lillie.test(x = mexico$WLLP ) #Distribuci髇 normal
+lillie.test(x = mexico$WLLP ) #Distribuci贸n normal
 
 
 ggplot(mexico, aes(sample = BL)) +
@@ -157,7 +157,7 @@ ggplot(data = mexico, aes(x=WB)) +
   stat_function(fun = dnorm, colour = "firebrick",
                 args = list(mean = mean(mexico$WB),
                             sd = sd(mexico$WB))) +
-  ggtitle("Histograma mexico + curva normal te髍ica") +
+  ggtitle("Histograma mexico + curva normal te贸rica") +
   theme_bw()
 
 ggplot(data = mexico, aes(x=DB)) +
@@ -166,7 +166,7 @@ ggplot(data = mexico, aes(x=DB)) +
   stat_function(fun = dnorm, colour = "firebrick",
                 args = list(mean = mean(mexico$DB),
                             sd = sd(mexico$DB))) +
-  ggtitle("Histograma mexico + curva normal te髍ica") +
+  ggtitle("Histograma mexico + curva normal te贸rica") +
   theme_bw()
 
 ggplot(data = mexico, aes(x=WLLP)) +
@@ -175,7 +175,7 @@ ggplot(data = mexico, aes(x=WLLP)) +
   stat_function(fun = dnorm, colour = "firebrick",
                 args = list(mean = mean(mexico$WLLP),
                             sd = sd(mexico$WLLP))) +
-  ggtitle("Histograma mexico + curva normal te髍ica") +
+  ggtitle("Histograma mexico + curva normal te贸rica") +
   theme_bw()
 
 
@@ -196,7 +196,7 @@ kurtosis(mexico$WLLP) #Leptocurtica
 
 ####### Homogeneidad de varianzas - HOMOCEDASTICIDAD
 
-#Contraste de la raz髇 de varianzas
+#Contraste de la raz贸n de varianzas
 ggplot(data = Data, aes(x = COUNTRY, y = BL, colour = COUNTRY)) +
   geom_boxplot() +
   geom_point() +
@@ -220,51 +220,51 @@ leveneTest(Data$WLLP ~ Data$COUNTRY) #Hay homogeneidad de varianza
 
 ######## TRANSFORMACIONES
 
-#M閤ico-BL ---> Distribuci髇 normal
+#M茅xico-BL ---> Distribuci贸n normal
 ggplot(mexico, aes(sample = BL)) +
   stat_qq() +
   stat_qq_line()
 
-#M閤ico-WB ---> Distribuci髇 NO normal
+#M茅xico-WB ---> Distribuci贸n NO normal
 
 ggplot(mexico, aes(sample = WB)) +
   stat_qq() +
   stat_qq_line()
 
-#M閤ico-DB ---> Distribuci髇 NO normal
+#M茅xico-DB ---> Distribuci贸n NO normal
 
 ggplot(mexico, aes(sample = DB)) +
   stat_qq() +
   stat_qq_line()
 
-#M閤ico-WLLP ---> Distribuci髇 normal
+#M茅xico-WLLP ---> Distribuci贸n normal
 
 ggplot(mexico, aes(sample = WLLP)) +
   stat_qq() +
   stat_qq_line()
 
 
-#Transformaci髇 de Tukey
+#Transformaci贸n de Tukey
 #MEXICO-WB
 mxWB <- data.frame(wb =mexico$WB)
 
-lillie.test(mxWB$wb) # No sigue una distribuci髇 normal
+lillie.test(mxWB$wb) # No sigue una distribuci贸n normal
 
-T_tuk =  transformTukey(mxWB$wb) # Sigue una distribuci髇 normal despu閟 de la transformaci髇
+T_tuk =  transformTukey(mxWB$wb) # Sigue una distribuci贸n normal despu茅s de la transformaci贸n
 
 #MEXICO_DB
 mxDB <- data.frame(db =mexico$DB)
 
-lillie.test(mxDB$db) # No sigue una distribuci髇 normal
+lillie.test(mxDB$db) # No sigue una distribuci贸n normal
 
-T_tuk =  transformTukey(mxDB$db) # No sigue una distribui髇 normal despues de la transformaci髇
+T_tuk =  transformTukey(mxDB$db) # No sigue una distribui贸n normal despues de la transformaci贸n
 
 
 
-#Test param閠ricos
+#Test param茅tricos
 usa <- Data[which(Data$COUNTRY == 'us'),]
 
-lillie.test(x = usa$BL) #Distribuci髇 normal
+lillie.test(x = usa$BL) #Distribuci贸n normal
 
 t.test(mexico$BL, usa$BL, alternative = "two.sided") # Las medias son diferentes
 t.test(mexico$BL, usa$BL, alternative = "greater") # La media de x es menor
@@ -276,7 +276,7 @@ var(mexico$BL)/var(usa$BL) # Las varianzas son diferentes
 
 
 
-#Test no param閠ricos
+#Test no param茅tricos
 lillie.test(x = usa$WB)
 
 wilcox.test(mexico$WB, usa$WB, alternative = "two.sided") # No hay diferencias
