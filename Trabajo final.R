@@ -1,0 +1,168 @@
+  Pastos <- read.csv("C:/Users/Juan/Desktop/Remolina_Ortiz.csv")
+head(Pastos)
+View(Pastos)
+attach(Pastos)
+names(Pastos)
+summary(Pastos$biomasa)
+summary(Pastos
+        )
+
+
+mean(Pastos$biomasa[which(Pastos$año=='2016')])
+mean(Pastos$biomasa[which(Pastos$año=='2017')])
+mean(Pastos$biomasa[which(Pastos$año=='2018')])
+mean(Pastos$biomasa[which(Pastos$año=='2019')])
+meanbio<-c(mean(Pastos$biomasa[which(Pastos$año=='2016')]),
+           mean(Pastos$biomasa[which(Pastos$año=='2017')]),
+           mean(Pastos$biomasa[which(Pastos$año=='2018')]),
+           mean(Pastos$biomasa[which(Pastos$año=='2019')]))
+
+mean(Pastos$biomasa[which(Pastos$mes=='febrero')])
+mean(Pastos$biomasa[which(Pastos$mes=='Noviembre')])
+
+sum(Pastos$riqueza[which(Pastos$mes=='Noviembre')])
+sum(Pastos$riqueza[which(Pastos$mes=='febrero')])
+
+mean(Pastos$riqueza[which(Pastos$año == "2016")which(Pastos$mes=='Noviembre')])
+mean(Pastos$riqueza[which(Pastos$mes=='febrero')])
+
+sum(Pastos$riqueza[which(Pastos$año=='2016')])
+sum(Pastos$riqueza[which(Pastos$año=='2017')])
+sum(Pastos$riqueza[which(Pastos$año=='2018')])
+sum(Pastos$riqueza[which(Pastos$año=='2019')])
+
+mean(Pastos$riqueza[which(Pastos$año=='2016')])
+mean(Pastos$riqueza[which(Pastos$año=='2017')])
+mean(Pastos$riqueza[which(Pastos$año=='2018')])
+mean(Pastos$riqueza[which(Pastos$año=='2019')])
+
+meanriq <- c(mean(Pastos$riqueza[which(Pastos$año=='2016')]),
+             mean(Pastos$riqueza[which(Pastos$año=='2017')]),
+             mean(Pastos$riqueza[which(Pastos$año=='2018')]),
+             mean(Pastos$riqueza[which(Pastos$año=='2019')]))
+
+barplot(table(meanriq))
+plot(meanbio,meanriq)
+
+x <- meanbio
+y <- meanriq
+
+x
+y
+
+plot(x,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (Número de especies)",col="black", main="Relación  las medias de la biomasa y
+     la riqueza" )
+reg<-lm(y~x)
+summary(reg)
+
+abline(reg, col= "red") 
+#Verificamos si los datos son normales, utilizando metodos graficos#
+hist(Pastos$biomasa)
+boxplot(Pastos$biomasa)
+qqnorm(Pastos$biomasa)
+qqline(Pastos$biomasa)
+#podemos observar que los datos de biomasa son normales#
+
+hist(Pastos$riqueza)
+boxplot(Pastos$riqueza)
+qqnorm(Pastos$riqueza)
+qqline(Pastos$riqueza)
+#los datos de riqueza no son normales#
+
+hist(Pastos$vastagos)
+boxplot(Pastos$vastagos)
+qqnorm(Pastos$vastagos)
+qqline(Pastos$vastagos)
+#los datos de vastagos son normales#
+
+#para poder verificar si las muestras son normales utilizamos varios test# 
+
+shapiro.test(Pastos$biomasa)
+#su p-value = 0.01471 lo que nos dice que los datos no son normales
+
+shapiro.test(Pastos$riqueza)
+# no son normales
+
+shapiro.test(Pastos$vastagos)
+# no son normales
+
+install.packages("nortest")
+library(nortest)
+
+lillie.test(Pastos$biomasa)
+lillie.test(Pastos$riqueza)
+lillie.test(Pastos$vastagos)
+
+Gra <- ggplot(Pastos)+
+  geom_point(aes(x=riqueza, y= biomasa, color= año))+
+  scale_color_gradient()+
+  facet_wrap(~mes)
+Gra
+
+ggplot(Pastos)+
+  geom_bar(aes(x=riqueza, fill=año ))+
+  facet_wrap(~año)
+
+ggplot(Pastos)+
+  geom_bar(aes(x=riqueza, fill=mes))+
+  facet_wrap(~mes)  
+
+
+
+barplot(table(Pastos$riqueza))
+plot(Pastos$biomasa,Pastos$riqueza)
+x=Pastos$biomasa
+y=Pastos$riqueza
+z=Pastos$vastagos
+ plot(x,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (Número de especies)",col= c("g"), main="Relación entre biomasa y riqueza" )
+reg<-lm(y~x)
+summary(reg)
+
+abline(reg, col= "red")        
+
+plot(z,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (Número de especies)", main="Relación entre biomasa y riqueza" )
+reg<-lm(y~x)
+summary(reg)
+abline(reg)  
+library(colourpicker)
+
+ 
+pg <- boxplot(biomasa ~ mes, col =c("red","yellow","blue","purple"),
+        main = "Biomasa Thalasia sp respecto a los meses")
+
+
+plot(Pastos$riqueza ~ Pastos$biomasa, col = año,
+    
+        main = "Riqueza por año")
+
+library(ggplot2)
+p <- ggplot(Pastos)
+p <- p + aes(x = biomasa, y = riqueza, colour= mes) 
+  
+p <- ggplot(Pastos, aes(x =biomasa , y = riqueza, colour= mes))
+summary(p)
+q <- p + geom_point()
+q
+
+ggplot(Pastos)+
+  geom_point(aes(x=biomasa, y=riqueza,color= año,shape=mes))
+
+pastos1 <- aov(riqueza~biomasa + vastagos, data=Pastos)
+pastos2 <-  aov(riqueza~biomasa * vastagos, data=Pastos)
+pastos1
+pastos2
+
+anova(pastos1)
+anova(pastos2)
+
+anova1 <- aov(riqueza~biomasa)
+
+anova(anova1)
+j1 <- sum(Pastos$riqueza[which(Pastos$año=='2016')])
+
+
+j2 <- sum(Pastos$riqueza[which(Pastos$año=='2019')])
+total <- j1+j2
+total
+BC = 1 - ((2 * 131)/total)
+BC
