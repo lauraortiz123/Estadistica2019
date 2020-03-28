@@ -8,14 +8,14 @@ summary(Pastos
         )
 
 
-mean(Pastos$biomasa[which(Pastos$año=='2016')])
-mean(Pastos$biomasa[which(Pastos$año=='2017')])
-mean(Pastos$biomasa[which(Pastos$año=='2018')])
-mean(Pastos$biomasa[which(Pastos$año=='2019')])
-meanbio<-c(mean(Pastos$biomasa[which(Pastos$año=='2016')]),
-           mean(Pastos$biomasa[which(Pastos$año=='2017')]),
-           mean(Pastos$biomasa[which(Pastos$año=='2018')]),
-           mean(Pastos$biomasa[which(Pastos$año=='2019')]))
+mean(Pastos$biomasa[which(Pastos$aÃ±o=='2016')])
+mean(Pastos$biomasa[which(Pastos$aÃ±o=='2017')])
+mean(Pastos$biomasa[which(Pastos$aÃ±o=='2018')])
+mean(Pastos$biomasa[which(Pastos$aÃ±o=='2019')])
+meanbio<-c(mean(Pastos$biomasa[which(Pastos$aÃ±o=='2016')]),
+           mean(Pastos$biomasa[which(Pastos$aÃ±o=='2017')]),
+           mean(Pastos$biomasa[which(Pastos$aÃ±o=='2018')]),
+           mean(Pastos$biomasa[which(Pastos$aÃ±o=='2019')]))
 
 mean(Pastos$biomasa[which(Pastos$mes=='febrero')])
 mean(Pastos$biomasa[which(Pastos$mes=='Noviembre')])
@@ -23,23 +23,23 @@ mean(Pastos$biomasa[which(Pastos$mes=='Noviembre')])
 sum(Pastos$riqueza[which(Pastos$mes=='Noviembre')])
 sum(Pastos$riqueza[which(Pastos$mes=='febrero')])
 
-mean(Pastos$riqueza[which(Pastos$año == "2016")which(Pastos$mes=='Noviembre')])
+mean(Pastos$riqueza[which(Pastos$aÃ±o == "2016")which(Pastos$mes=='Noviembre')])
 mean(Pastos$riqueza[which(Pastos$mes=='febrero')])
 
-sum(Pastos$riqueza[which(Pastos$año=='2016')])
-sum(Pastos$riqueza[which(Pastos$año=='2017')])
-sum(Pastos$riqueza[which(Pastos$año=='2018')])
-sum(Pastos$riqueza[which(Pastos$año=='2019')])
+sum(Pastos$riqueza[which(Pastos$aÃ±o=='2016')])
+sum(Pastos$riqueza[which(Pastos$aÃ±o=='2017')])
+sum(Pastos$riqueza[which(Pastos$aÃ±o=='2018')])
+sum(Pastos$riqueza[which(Pastos$aÃ±o=='2019')])
 
-mean(Pastos$riqueza[which(Pastos$año=='2016')])
-mean(Pastos$riqueza[which(Pastos$año=='2017')])
-mean(Pastos$riqueza[which(Pastos$año=='2018')])
-mean(Pastos$riqueza[which(Pastos$año=='2019')])
+mean(Pastos$riqueza[which(Pastos$aÃ±o=='2016')])
+mean(Pastos$riqueza[which(Pastos$aÃ±o=='2017')])
+mean(Pastos$riqueza[which(Pastos$aÃ±o=='2018')])
+mean(Pastos$riqueza[which(Pastos$aÃ±o=='2019')])
 
-meanriq <- c(mean(Pastos$riqueza[which(Pastos$año=='2016')]),
-             mean(Pastos$riqueza[which(Pastos$año=='2017')]),
-             mean(Pastos$riqueza[which(Pastos$año=='2018')]),
-             mean(Pastos$riqueza[which(Pastos$año=='2019')]))
+meanriq <- c(mean(Pastos$riqueza[which(Pastos$aÃ±o=='2016')]),
+             mean(Pastos$riqueza[which(Pastos$aÃ±o=='2017')]),
+             mean(Pastos$riqueza[which(Pastos$aÃ±o=='2018')]),
+             mean(Pastos$riqueza[which(Pastos$aÃ±o=='2019')]))
 
 barplot(table(meanriq))
 plot(meanbio,meanriq)
@@ -50,7 +50,7 @@ y <- meanriq
 x
 y
 
-plot(x,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (Número de especies)",col="black", main="Relación  las medias de la biomasa y
+plot(x,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (NÃºmero de especies)",col="black", main="RelaciÃ³n  las medias de la biomasa y
      la riqueza" )
 reg<-lm(y~x)
 summary(reg)
@@ -94,14 +94,14 @@ lillie.test(Pastos$riqueza)
 lillie.test(Pastos$vastagos)
 
 Gra <- ggplot(Pastos)+
-  geom_point(aes(x=riqueza, y= biomasa, color= año))+
+  geom_point(aes(x=riqueza, y= biomasa, color= aÃ±o))+
   scale_color_gradient()+
   facet_wrap(~mes)
 Gra
 
 ggplot(Pastos)+
-  geom_bar(aes(x=riqueza, fill=año ))+
-  facet_wrap(~año)
+  geom_bar(aes(x=riqueza, fill=aÃ±o ))+
+  facet_wrap(~aÃ±o)
 
 ggplot(Pastos)+
   geom_bar(aes(x=riqueza, fill=mes))+
@@ -114,13 +114,13 @@ plot(Pastos$biomasa,Pastos$riqueza)
 x=Pastos$biomasa
 y=Pastos$riqueza
 z=Pastos$vastagos
- plot(x,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (Número de especies)",col= c("g"), main="Relación entre biomasa y riqueza" )
+ plot(x,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (NÃºmero de especies)",col= c("g"), main="RelaciÃ³n entre biomasa y riqueza" )
 reg<-lm(y~x)
 summary(reg)
 
 abline(reg, col= "red")        
 
-plot(z,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (Número de especies)", main="Relación entre biomasa y riqueza" )
+plot(z,y, pch=16, xlab="Biomasa (g)", ylab="Riqueza (NÃºmero de especies)", main="RelaciÃ³n entre biomasa y riqueza" )
 reg<-lm(y~x)
 summary(reg)
 abline(reg)  
@@ -131,9 +131,9 @@ pg <- boxplot(biomasa ~ mes, col =c("red","yellow","blue","purple"),
         main = "Biomasa Thalasia sp respecto a los meses")
 
 
-plot(Pastos$riqueza ~ Pastos$biomasa, col = año,
+plot(Pastos$riqueza ~ Pastos$biomasa, col = aÃ±o,
     
-        main = "Riqueza por año")
+        main = "Riqueza por aÃ±o")
 
 library(ggplot2)
 p <- ggplot(Pastos)
@@ -145,7 +145,7 @@ q <- p + geom_point()
 q
 
 ggplot(Pastos)+
-  geom_point(aes(x=biomasa, y=riqueza,color= año,shape=mes))
+  geom_point(aes(x=biomasa, y=riqueza,color= aÃ±o,shape=mes))
 
 pastos1 <- aov(riqueza~biomasa + vastagos, data=Pastos)
 pastos2 <-  aov(riqueza~biomasa * vastagos, data=Pastos)
@@ -158,10 +158,10 @@ anova(pastos2)
 anova1 <- aov(riqueza~biomasa)
 
 anova(anova1)
-j1 <- sum(Pastos$riqueza[which(Pastos$año=='2016')])
+j1 <- sum(Pastos$riqueza[which(Pastos$aÃ±o=='2016')])
 
 
-j2 <- sum(Pastos$riqueza[which(Pastos$año=='2019')])
+j2 <- sum(Pastos$riqueza[which(Pastos$aÃ±o=='2019')])
 total <- j1+j2
 total
 BC = 1 - ((2 * 131)/total)
